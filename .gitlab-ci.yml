@@ -1,9 +1,23 @@
-image: ruby:2.5.1
+services:
+  - docker:dind
+
+image: ruby:2.5.7
 stages:
   - build
+  - package
 
-job_build:
+build_job:
   stage: build
   script:
-    - ./build_all.sh
+    - bundle install
+    - bundle exec rake
+    
+package_job:
+  stage: package
+  image: docker:latest
+  script:
+    - docker build -t nicopaez/advisor:latest .
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" docker.io
+    - docker push nicopaez/advisor:latest
+
 
