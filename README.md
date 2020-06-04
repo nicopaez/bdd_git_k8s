@@ -1,4 +1,5 @@
-# BDD from git to k8s by @inicopaez
+BDD from git to k8s by @inicopaez
+=================================
 
 This workshop requires participantes to prepare their machines with the following software:
 
