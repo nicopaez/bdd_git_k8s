@@ -1,4 +1,3 @@
-require_relative '../../model/calculator'
 require 'rspec/expectations'
 require 'rspec'
 require 'rack/test'

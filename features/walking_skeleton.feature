@@ -1,6 +1,5 @@
 Feature: Walking Skeleton
 
-  @wip
   Scenario: Process the preference
     Given my preference is "WARM"
     When I ask for suggestion

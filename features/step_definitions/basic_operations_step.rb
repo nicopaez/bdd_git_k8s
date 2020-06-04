@@ -1,17 +1,23 @@
-Given(/^operand A is (\d+)$/) do |opA|
-  @operandA = opA.to_i
+Given('my preference is {string}') do |preference|
+  @preference = preference
 end
 
-Given(/^operand B is (\d+)$/) do |opB|
-  @operandB = opB.to_i  
+When('I ask for suggestion') do
+  get "/suggestions?preference#{@preference}"
+  expect(last_response.status).to eq 200
 end
 
-When(/^I add them$/) do
-  body = {"a": @operandA, "b": @operandB } 
-  post '/add', body.to_json, "CONTENT_TYPE" => "application/json"
+Then('I get {string}') do |recommendation|
+  data = JSON.parse last_response.body
+  expect(data['suggestion']).to eq recommendation
 end
 
-Then(/^the result is (\d+)$/) do |r|
-  expect(last_response.status).to be == 200
-  expect(JSON.parse(last_response.body)["result"]).to eq r.to_i
+When('I ask for in Buenos Aires') do
+  
+end
+
+Then('I get a temperate in Celcius between {int} and {int}') do |min_temp, max_temp|
+  # Then('I get a temperate in Celcius between {int} and {float}') do |int, float|
+  # Then('I get a temperate in Celcius between {float} and {int}') do |float, int|
+  # Then('I get a temperate in Celcius between {float} and {float}') do |float, float2|
 end
