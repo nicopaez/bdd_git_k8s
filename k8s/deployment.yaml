@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: advisor-deployment
+  labels:
+    app: advisor
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: advisor
+  template:
+    metadata:
+      labels:
+        app: advisor
+    spec:
+      containers:
+      - name: advisor
+        image: nicopaez/advisor:latest
+        ports:
+        - containerPort: 4567
+        envFrom:
+          - configMapRef:
+              name: advisor-config
+        livenessProbe:
+          failureThreshold: 12
+          httpGet:
+            path: /health
+            port: 4567
+          initialDelaySeconds: 60
+          periodSeconds: 60
+          successThreshold: 1
+          timeoutSeconds: 5
+        readinessProbe:
+          failureThreshold: 5
+          httpGet:
+            path: /health
+            port: 4567
+          initialDelaySeconds: 120
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 5
+
+

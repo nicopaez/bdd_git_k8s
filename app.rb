@@ -4,12 +4,18 @@ Dir["./model/*.rb"].each {|file| require file }
 
 set :bind, '0.0.0.0'
 
+get '/health' do
+  content_type :json
+  { :status => 'ok' }.to_json
+end
+
 get '/' do
   content_type :json
   { :content => 'hello' }.to_json
 end
 
 get '/suggestions' do
+  content_type :json
   pref = params['preference']
   suggestion = Advisor.new(nil).suggestion_for(pref)
   { :suggestion => suggestion }.to_json

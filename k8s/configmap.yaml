@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: advisor-config
+  labels:
+    app: advisor
+data:
+  API_KEY: "replace_this"

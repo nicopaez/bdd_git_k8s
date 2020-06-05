@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: advisor-service
+  labels:
+    app: advisor
+spec:
+  selector:
+    app: advisor
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 4567
+  type: NodePort
