@@ -16,7 +16,7 @@ package_job:
   stage: package
   image: docker:latest
   script:
-    - VERSION=`cat app.rb | grep VERSION | cut -c  10-14`
+    - VERSION=`cat app.rb | grep VERSION= | cut -c  10-14`
     - echo $VERSION
     - docker build -t "nicopaez/advisor:$VERSION" .
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" docker.io
