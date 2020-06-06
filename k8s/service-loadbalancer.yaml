@@ -1,7 +1,7 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: advisor-service
+  name: advisor-service-loadbalancer
   labels:
     app: advisor
 spec:
@@ -11,4 +11,4 @@ spec:
   - protocol: TCP
     port: 80
     targetPort: 4567
-  type: NodePort
+  type: LoadBalancer
