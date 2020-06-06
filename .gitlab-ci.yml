@@ -5,6 +5,7 @@ image: ruby:2.5.7
 stages:
   - build
   - package
+  - deploy
 
 build_job:
   stage: build
