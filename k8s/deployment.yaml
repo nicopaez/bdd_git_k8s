@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: advisor
-        image: nicopaez/advisor:latest
+        image: nicopaez/advisor:1.0.0
         ports:
         - containerPort: 4567
         envFrom:

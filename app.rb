@@ -4,9 +4,11 @@ Dir["./model/*.rb"].each {|file| require file }
 
 set :bind, '0.0.0.0'
 
+VERSION='1.0.0'
+
 get '/health' do
   content_type :json
-  { :status => 'ok' }.to_json
+  { :status => 'ok', :version => VERSION }.to_json
 end
 
 get '/' do

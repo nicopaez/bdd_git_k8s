@@ -16,8 +16,11 @@ package_job:
   stage: package
   image: docker:latest
   script:
+    - VERSION=`cat app.rb | grep VERSION | cut -c  10-14`
     - docker build -t nicopaez/advisor:latest .
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" docker.io
-    - docker push nicopaez/advisor:latest
+    - docker push nicopaez/advisor:$VERSION
+  only:
+    - setup
 
 
