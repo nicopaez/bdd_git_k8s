@@ -25,17 +25,17 @@ package_job:
   only:
     - setup
 
-  deploy_job:
-    stage: deploy
-    image: alpine:3.7
-    script:
-      - apk update  && apk add --no-cache curl
-      - curl -LO https://storage.googleapis.com/kubernetes-release/release/1.17.5/bin/linux/amd64/kubectl
-      - chmod +x ./kubectl && mv ./kubectl /usr/local/bin/kubectl
-      - mkdir -p $HOME/.kube
-      - echo -n $KUBE_CONFIG | base64 -d > $HOME/.kube/config
-      - kubectl config view
-    only:
-      - setup
+deploy_job:
+  stage: deploy
+  image: alpine:3.7
+  script:
+    - apk update  && apk add --no-cache curl
+    - curl -LO https://storage.googleapis.com/kubernetes-release/release/1.17.5/bin/linux/amd64/kubectl
+    - chmod +x ./kubectl && mv ./kubectl /usr/local/bin/kubectl
+    - mkdir -p $HOME/.kube
+    - echo -n $KUBE_CONFIG | base64 -d > $HOME/.kube/config
+    - kubectl config view
+  only:
+    - setup
 
 
