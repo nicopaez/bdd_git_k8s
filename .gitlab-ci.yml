@@ -3,40 +3,17 @@ services:
 
 image: ruby:2.5.7
 stages:
-  - build
-  - package
   - deploy
 
-build_job:
-  stage: build
-  script:
-    - bundle install
-    - bundle exec rake
-    
-package_job:
-  stage: package
-  image: docker:latest
-  script:
-    - VERSION=`cat app.rb | grep VERSION= | cut -c  10-14`
-    - echo $VERSION
-    - docker build -t "nicopaez/advisor:$VERSION" .
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" docker.io
-    - docker push "nicopaez/advisor:$VERSION"
-  only:
-    - setup
 
 deploy_job:
   stage: deploy
   image: alpine:3.7
   script:
-    - apk update  && apk add --no-cache curl
-    - curl -LO https://storage.googleapis.com/kubernetes-release/release/1.17.5/bin/linux/amd64/kubectl
-    - chmod +x ./kubectl && mv ./kubectl /usr/local/bin/kubectl
-    - mkdir -p $HOME/.kube
+    - echo ${KUBECONFIG}
+    - cat ${KUBECONFIG}
     - cat ${KUBECONFIG} > $HOME/.kube/config
-    - kubectl version
-    - kubectl config view
   only:
-    - setup
+    - k8
 
 
