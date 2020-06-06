@@ -33,7 +33,8 @@ deploy_job:
     - curl -LO https://storage.googleapis.com/kubernetes-release/release/1.17.5/bin/linux/amd64/kubectl
     - chmod +x ./kubectl && mv ./kubectl /usr/local/bin/kubectl
     - mkdir -p $HOME/.kube
-    - echo -n $KUBE_CONFIG | base64 -d > $HOME/.kube/config
+    - cat ${KUBECONFIG} > $HOME/.kube/config
+    - kubectl version
     - kubectl config view
   only:
     - setup
