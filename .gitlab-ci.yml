@@ -14,7 +14,8 @@ deploy_job:
     - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
     - chmod +x ./kubectl && mv ./kubectl /usr/local/bin/kubectl
     - mkdir -p ${HOME}/.kube
-    - cat k8s/k8s-1-17-5-do-0-sfo2-nicopaez-kubeconfig.yaml > $HOME/.kube/config
+    - cat ${KUBECONFIG}
+    - cat ${KUBECONFIG} > $HOME/.kube/config
     - kubectl version
   only:
     - k8
