@@ -12,11 +12,11 @@ Notes for participants
 This workshop requires participantes to prepare their machines with the following software:
 
 * Git client
-* GitLab (free) account 
-* Docker Desktop (docker-engine, docker-compose and kubectl)
+* GitLab account 
+* Docker
 * Visual Studio Code
 * Zoom.us
 
-During the workshop each participant will decide to work with Ruby (v2.5.7) or Java (8) so the corresponding development tools will be requiered.
+During the workshop each participant will decide to work with Ruby (v2.5.7) or Java8/Maven3 so the corresponding development tools will be requiered.
 
 In case of any doubts please contact me (nicopaez_at_computer_dot_org)
